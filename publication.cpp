@@ -37,9 +37,9 @@ bool Publication::is_checked_out() {
 string Publication::to_string() {
   if(checked_out == true) {
     return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
-            _target_age.to_string(); + " " + _media.to_string(); + " " +
-            _genre.to_string(); + ") ISBN: " + _isbn + "\nChecked out to " +
-            _patron_name + " (" + _patron_phone + ")";
+            ages[target_age] + " " + genres[genre] + " " + medias[media] +
+            ") ISBN: " + _isbn + "\nChecked out to " +_patron_name +
+            " (" + _patron_phone + ")";
   }
 
   return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
