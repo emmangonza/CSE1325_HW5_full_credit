@@ -16,7 +16,7 @@ string Library::publication_to_string(int publication_index) {
   return publications[publication_index].to_string();
 }
 
-int number_of_publications() {
+int Library::number_of_publications() {
   return publications.size();
 }
 
