@@ -1,25 +1,28 @@
 # CSE_1325 Homework 4
 
-output: main.o publication.o library.o genre.o media.o age.o
-	g++ --std=c++11 main.o publication.o library.o genre.o media.o age.o -o output
+output: main.o publication.o library.o
+	g++ --std=c++11 -o output main.o publication.o library.o
 
 main.o: main.cpp
 	g++ --std=c++11 -c main.cpp
 
-publication.o: publication.cpp publication.h
-	g++ --std=c++11 -c publication.cpp
+test_library: test_library.o library.o publication.o
+	g++ --std=c++11 -o test_library test_library.o library.o publication.o
+
+test_library.o: test_library.cpp
+	g++ --std=c++11 -c test_library.cpp
 
 library.o: library.cpp library.h
 	g++ --std=c++11 -c library.cpp
 
-genre.o: genre.cpp genre.h
-	g++ --std=c++11 -c genre.cpp
+test_publication: test_publication.o publication.o
+	g++ --std=c++11 -o test_publication test_publication.o publication.o
 
-media.o: media.cpp media.h
-	g++ --std=c++11 -c media.cpp
+test_publication.o: test_publication.cpp
+	g++ --std=c++11 -c -w test_publication.cpp
 
-age.o: age.cpp age.h
-	g++ --std=c++11 -c age.cpp
+publication.o: publication.cpp publication.h
+	g++ --std=c++11 -c publication.cpp
 
 clean:
-	rm *.o output
+	-rm -f *.o output test_publication test_library
