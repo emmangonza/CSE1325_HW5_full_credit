@@ -1,34 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
 #include "library.h"
-#include "publication.h"
-using namespace std;
 
 void Library::add_publication(Publication pub) {
-  string title, author, copyright, genre, media, age, isbn;
-
-  cout << "Enter the title: ";
-  getline(cin, title);
-  cout << "Enter the author: ";
-  getline(cin, author);
-  cout << "Enter the copyright year: ";
-  getline(cin, copyright);
-  cout << "Enter the genre(book, periodical, newspaper, audio, video): ";
-  getline(cin, genre);
-  cout << "Enter the media(fiction, non-fiction, self-help, performance): ";
-  getline(cin, media);
-  cout << "Enter the target age(children, teen, adult, restricted): ";
-  getline(cin, age);
-  cout << "Enter the isbn number: ";
-  getline(cin, isbn);
-
-  Genre pub_genre(genre);
-  Media pub_media(media);
-  Age pub_age(age);
-
-  pub(title, author, copyright, pub_genre, pub_media, pub_age, isbn);
-
   publications.push_back(pub);
 }
 
@@ -46,4 +18,19 @@ string Library::publication_to_string(int publication_index) {
 
 int number_of_publications() {
   return publications.size();
+}
+
+void Library::easter_egg() {
+ add_publication(Publication("The Firm", "John Grisham", "1991",
+       Genre::fiction, Media::book, Age::adult, "0440245923"));
+ add_publication(Publication("Foundation", "Isaac Asimov", "1942",
+        Genre::fiction, Media::book, Age::adult, "0385177259"));
+ add_publication(Publication("Foundation and Empire", "Isaac Asimov", "1943",
+        Genre::fiction, Media::book, Age::adult, "0385177259"));
+ add_publication(Publication("Second Foundation", "Isaac Asimov", "1944",
+        Genre::fiction, Media::book, Age::adult, "0385177259"));
+ add_publication(Publication("War of the Worlds", "Jeff Wayne", "1977",
+        Genre::performance, Media::audio, Age::teen, "9780711969148"));
+ add_publication(Publication("Willy Wonka and the Chocolate Factory", "Roald Dahl", "1971",
+        Genre::performance, Media::video, Age::children, "0142410314"));
 }
