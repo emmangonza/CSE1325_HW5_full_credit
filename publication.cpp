@@ -22,7 +22,7 @@ void Publication::check_out(string patron_name, string patron_phone) {
 }
 
 void Publication::check_in() {
-  if(check_out == true) {
+  if(checked_out == true) {
     checked_out = false;
   }
   else {
@@ -37,12 +37,12 @@ bool Publication::is_checked_out() {
 string Publication::to_string() {
   if(checked_out == true) {
     return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
-            ages[target_age] + " " + genres[genre] + " " + medias[media] +
+            ages[_target_age] + " " + genres[_genre] + " " + medias[_media] +
             ") ISBN: " + _isbn + "\nChecked out to " +_patron_name +
             " (" + _patron_phone + ")";
   }
 
   return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
-          ages[target_age] + " " + genres[genre] + " " + medias[media] +
+          ages[_target_age] + " " + genres[_genre] + " " + medias[_media] +
           ") ISBN: " + _isbn + "\nNot checked out";
 }
