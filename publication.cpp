@@ -44,5 +44,5 @@ string Publication::to_string() {
 
   return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
           ages[_target_age] + " " + genres[_genre] + " " + medias[_media] +
-          ") ISBN: " + _isbn + "\nNot checked out";
+          ") ISBN: " + _isbn;
 }
