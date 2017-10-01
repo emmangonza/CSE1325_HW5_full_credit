@@ -35,14 +35,13 @@ bool Publication::is_checked_out() {
 }
 
 string Publication::to_string() {
-  if(checked_out == true) {
-    return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
-            ages[_target_age] + " " + genres[_genre] + " " + medias[_media] +
-            ") ISBN: " + _isbn + "\nChecked out to " +_patron_name +
-            " (" + _patron_phone + ")";
-  }
-
-  return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
+  string pub =  "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
           ages[_target_age] + " " + genres[_genre] + " " + medias[_media] +
           ") ISBN: " + _isbn;
+
+  if(checked_out == true) {
+    pub += "\nChecked out to " +_patron_name + " (" + _patron_phone + ")";
+  }
+
+  return pub;
 }
