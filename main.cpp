@@ -1,82 +1,140 @@
+#include "library.h"
+#include "publication.h"
+#include "enums.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
-#include "library.h"
-#include "publication.h"
+
 using namespace std;
 
-void show_menu();
-void list_publications(Library lib);
-void execute_cmd(int cmd, Library lib, Publication pub;
-
-void show_menu() {
-  cout << "\n===============================\n";
-  cout << "C1325 Library Management System\n";
-  cout << "===============================\n";
-  cout << "\nPublications\n------------\n";
-  cout << "(1) Add publication\n(2) List all publications\n";
-  cout << "(3) Check out publication\n(4) Check in publication\n";
-  cout << "\nUtility\n-------\n";
-  cout << "(9) Help\n(0) Exit\n";
-}
-
-void list_publications(Library lib) {
-  for(int i = 0; i < lib.number_of_publications(); ++i) {
-    cout << lib.publication_to_string(i);
-    cout << "\n\n";
-  }
-}
-
-void execute_cmd(int cmd, Library lib, Publication pub) {
-  int index;
-  if(cmd == 1) lib.add_publication(pub);
-  if(cmd == 2) list_publications(lib);
-  if(cmd == 3) {
-    string name, number
-    cout << "\nEnter the patron name: ";
-    getline(cin, name);
-    cout << "\nEnter the patron phone number ";
-    getline(cin, number);
-    cout << "\nWhich publication?(Enter a number) ";
-    cin >> index;
-
-    lib.check_out(index, name, number);
-  }
-  if(cmd == 4) {
-    cout << "\nWhich publication?(Enter a number) ";
-    cin >> index;
-
-    lib.check_in(index);
-  }
-  if(cmd == 9) {
-    cout << "To perform any of the these actions, simply press the corresponding\n";
-    cout << "number on your keyboard.\n\n"
-    cout << "1. If you wish to add a publication, be prepared to enter the\n";
-    cout << "following: title, author, copyright, genre, media, age, and isbn\n\n";
-    cout << "2. Listing the publications will print all of the publications that\n";
-    cout << "have added.\n\n";
-    cout << "3. Checking a publication out will require the patrons name and\n";
-    cout << "phone number. When chosing a publication to check out or in, the first\n";
-    cout << "publication corresponds to the number 0 and the list goes down\n";
-    cout << "chronologically.\n\n"
-    cout << "4. Pressing 0 will exit the program.\n\n"
-  }
-}
-
 int main() {
-  int command;
-  Library main_lib;
-  Publication default_pub();
+  Library library;
 
-  show_menu();
+  int cmd = -1;
+  while (cmd != 0) {
+    cout << endl << endl;
+    cout << "=================================" << endl;
+    cout << "CSE1325 Library Management System" << endl;
+    cout << "=================================" << endl;
+    cout << endl;
+    cout << "Publications" << endl;
+    cout << "------------" << endl;
+    cout << "(1) Add publication" << endl;
+    cout << "(2) List all publications" << endl;
+    cout << "(3) Check out publication" << endl;
+    cout << "(4) Check in publication" << endl;
+    cout << endl;
+    cout << "Utility" << endl;
+    cout << "-------" << endl;
+    cout << "(9) Help" << endl;
+    cout << "(0) Exit" << endl;
+    cout << endl;
 
-  while(true) {
-    cout << "Enter your command: ";
-    cin >> command;
+    cout << "Command? ";
+    cin >> cmd;
+    cin.ignore();
 
-    if(command == 0) return 0;
 
-    exectue_cmd(command, lib, default_pub);
+    if (cmd == 1) {
+      string title, author, copyright, isbn;
+      int temp;
+      Genre genre;
+      Media media;
+      Age age;
+
+      cout << "Title? ";
+      getline(cin, title);
+
+      cout << "Author? ";
+      getline(cin, author);
+
+      cout << "Copyright date? ";
+      getline(cin, copyright);
+
+      for (int i = 0; i < genres.size(); ++i)
+        cout << "  " << i << ") " << genres[i] << endl;
+      cout << "Genre? ";
+      cin >> temp;
+      genre = (Genre) temp;
+      cin.ignore();
+
+      for (int i = 0; i < medias.size(); ++i)
+        cout << "  " << i << ") " << medias[i] << endl;
+      cout << "Media? ";
+      cin >> temp;
+      media = (Media) temp;
+      cin.ignore();
+
+      for (int i = 0; i < ages.size(); ++i)
+        cout << "  " << i << ") " << ages[i] << endl;
+      cout << "Age? ";
+      cin >> temp;
+      age = (Age) temp;
+      cin.ignore();
+
+      cout << "ISBN? ";
+      getline(cin, isbn);
+
+      try {
+        library.add_publication(Publication(title, author, copyright, genre, media, age, isbn));
+      } catch (Publication::Invalid_transaction e) {
+        cerr << "Unable to add" << endl;
+      }
+
+   }
+   if (cmd >= 2 && cmd <= 4) {
+      cout << endl;
+      cout << "----------------------------" << endl;
+      cout << "List of Library Publications" << endl;
+      cout << "----------------------------" << endl;
+      for (int i=0; i<library.number_of_publications(); ++i)
+        cout << i << ") " << library.publication_to_string(i) << endl;
+
+   }
+   if (cmd == 3) {
+      int pub;
+      string pat;
+      string pat_phone;
+
+      cout << "Publication number? ";
+      cin >> pub;
+      cin.ignore();
+
+      cout << "Patron name? ";
+      getline(cin, pat);
+      cout << "Patron phone? ";
+      getline(cin, pat_phone);
+
+      try {
+        library.check_out(pub, pat, pat_phone);
+      } catch (Publication::Invalid_transaction e) {
+        cerr << "ERROR: That publication is already checked out!" << endl;
+      }
+
+   }
+   if (cmd == 4) {
+      int pub;
+      cout << "Publication number? ";
+      cin >> pub;
+      cin.ignore();
+
+      try {
+        library.check_in(pub);
+      } catch (Publication::Invalid_transaction e) {
+        cerr << "ERROR: That publication is already checked in!" << endl;
+      }
+
+   }
+   if (cmd == 9) {
+      cout << "Try harder." << endl;
+
+   }
+   if (cmd == 99) {
+     library.easter_egg();
+   }
+   if (cmd < 0 || (4 < cmd && cmd < 9) || (9 < cmd && cmd < 99) || (99 < cmd)) { // Invalid command
+     cerr << "**** Invalid command - type 9 for help" << endl << endl;
+   }
   }
-
 }
