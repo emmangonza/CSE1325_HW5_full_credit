@@ -43,6 +43,6 @@ string Publication::to_string() {
   }
 
   return "\"" + _title + "\" by " + _author + ", " + _copyright + " (" +
-          _target_age.to_string(); + " " + _media.to_string(); + " " +
-          _genre.to_string(); + ") ISBN: " + _isbn + "\nNot checked out";
+          ages[target_age] + " " + genres[genre] + " " + medias[media] +
+          ") ISBN: " + _isbn + "\nNot checked out";
 }
