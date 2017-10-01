@@ -17,6 +17,8 @@ class Publication {
     bool is_checked_out();
     string to_string();
 
+    class Invalid_transaction : public exception { };
+
   private:
     string _title;
     string _author;
