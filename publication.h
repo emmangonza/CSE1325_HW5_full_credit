@@ -27,8 +27,8 @@ class Publication {
     Media _media;
     Age _target_age;
     string _isbn;
-    bool checked_out;
-    string _patron_name;
-    string _patron_phone;
+    bool checked_out = false;
+    string _patron_name = "";
+    string _patron_phone = "";
 };
 #endif
