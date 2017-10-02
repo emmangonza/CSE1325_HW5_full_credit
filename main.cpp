@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   string cmd_str = "";
   int cmd_num = -1;
   while (cmd_num != 0) {
-    string menu, title;
+    string menu, win_title;
     menu = "=================================\n"
            "CSE1325 Library Management System\n"
            "=================================\n\n"
@@ -34,56 +34,62 @@ int main(int argc, char *argv[]) {
            "(9) Help\n"
            "(0) Exit\n\n";
 
-    title = "Main menu";
+    win_title = "Main menu";
 
-    cmd_str = Dialogs::input(menu, title);
+    cmd_str = Dialogs::input(menu, win_title);
     if (cmd_str == "CANCEL") break;
 
     cmd_num = atoi(cmd_str.c_str());
 
 
     if (cmd_num == 1) {
-      string title, author, copyright, isbn;
-      int temp;
+      string book_title, author, copyright, isbn, temp_str, msg = "";
+      int temp_num;
       Genre genre;
       Media media;
       Age age;
 
-      cout << "Title? ";
-      getline(cin, title);
+      book_title = Dialogs::input("Title?", "Input");
 
-      cout << "Author? ";
-      getline(cin, author);
+      author = Dialogs::input("Author?", "Input");
 
-      cout << "Copyright date? ";
-      getline(cin, copyright);
+      copyright = Dialogs::input("Copyright date?", "Input");
 
-      for (int i = 0; i < genres.size(); ++i)
-        cout << "  " << i << ") " << genres[i] << endl;
-      cout << "Genre? ";
-      cin >> temp;
-      genre = (Genre) temp;
+      for (int i = 0; i < genres.size(); ++i) {
+         msg += "  "; //+ i + ") " + genres[i] + "\n";
+         msg += to_string(i);
+         msg += ") ";
+         msg += genres[i];
+         msg += "\n";
+      }
+      cout << msg;
+
+      temp_str = Dialogs::input(msg, "Select a Genre");
+
+      temp_num = atoi(temp_str.c_str());
+
+      genre = (Genre) temp_num;
       cin.ignore();
 
-      for (int i = 0; i < medias.size(); ++i)
-        cout << "  " << i << ") " << medias[i] << endl;
-      cout << "Media? ";
-      cin >> temp;
-      media = (Media) temp;
-      cin.ignore();
-
-      for (int i = 0; i < ages.size(); ++i)
-        cout << "  " << i << ") " << ages[i] << endl;
-      cout << "Age? ";
-      cin >> temp;
-      age = (Age) temp;
-      cin.ignore();
+      // for (int i = 0; i < medias.size(); ++i)
+      //   cout << "  " << i << ") " << medias[i] << endl;
+      // cout << "Media? ";
+      // cin >> temp;
+      // media = (Media) temp;
+      // cin.ignore();
+      //
+      // for (int i = 0; i < ages.size(); ++i)
+      //   cout << "  " << i << ") " << ages[i] << endl;
+      // cout << "Age? ";
+      // cin >> temp;
+      // age = (Age) temp;
+      // cin.ignore();
 
       cout << "ISBN? ";
       getline(cin, isbn);
 
       try {
-        library.add_publication(Publication(title, author, copyright, genre, media, age, isbn));
+        library.add_publication(Publication(book_title, author, copyright, genre, media, age, isbn));
       } catch (Publication::Invalid_transaction e) {
         cerr << "Unable to add" << endl;
       }
