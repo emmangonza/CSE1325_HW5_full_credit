@@ -43,41 +43,52 @@ int main(int argc, char *argv[]) {
 
 
     if (cmd_num == 1) {
-      string book_title, author, copyright, isbn, temp_str, msg = "";
+      string book_title, author, copyright, isbn, temp_str, msg;
       int temp_num;
       Genre genre;
       Media media;
       Age age;
 
       book_title = Dialogs::input("Title?", "Input");
+      if (book_title == "CANCEL") break;
 
       author = Dialogs::input("Author?", "Input");
+      if (author == "CANCEL") break;
 
-      copyright = Dialogs::input("Copyright date?", "Input");
+      copyright = Dialogs::input("Copyright date?", "Imsg = ""nput");
+      if (copyright == "CANCEL") break;
 
+      msg = "";
       for (int i = 0; i < genres.size(); ++i) {
-         msg += "  "; //+ i + ") " + genres[i] + "\n";
+         msg += "  ";
          msg += to_string(i);
          msg += ") ";
          msg += genres[i];
          msg += "\n";
       }
-      cout << msg;
 
       temp_str = Dialogs::input(msg, "Select a Genre");
+      if (temp_str == "CANCEL") break;
 
       temp_num = atoi(temp_str.c_str());
 
       genre = (Genre) temp_num;
       cin.ignore();
 
-      // for (int i = 0; i < medias.size(); ++i)
-      //   cout << "  " << i << ") " << medias[i] << endl;
-      // cout << "Media? ";
-      // cin >> temp;
-      // media = (Media) temp;
-      // cin.ignore();
-      //
+      msg = "";
+      for (int i = 0; i < medias.size(); ++i) {
+        msg += "  ";
+        msg += to_string(i);
+        msg += ") ";
+        msg += medias[i];
+        msg += "\n";
+      }
+      cout << "Media? ";
+      cin >> temp;
+      media = (Media) temp;
+      cin.ignore();
+
+      msg = ""
       // for (int i = 0; i < ages.size(); ++i)
       //   cout << "  " << i << ") " << ages[i] << endl;
       // cout << "Age? ";
