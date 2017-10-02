@@ -9,7 +9,7 @@ using namespace std;
 class Dialogs {
   public:
 
-    static void message(string msg, string title);
+    static void message(string msg, string title = "Info");
 
     static int question(string msg, string title = "Question",
                  vector<string> buttons = {"Cancel", "OK"});
