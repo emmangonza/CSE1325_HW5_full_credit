@@ -187,9 +187,9 @@ Use the '99' command to pre-populate test data.
    if (cmd_num == 99) {
      library.easter_egg();
    }
-  //  if (cmd_num < 0 || (4 < cmd_num && cmd_num < 9) || (9 < cmd_num && cmd_num < 99) || (99 < cmd_num)) { // Invalid command
-  //    cerr << "**** Invalid command - type 9 for help" << endl << endl;
-  //  }
+   if (cmd_num < 0 || (4 < cmd_num && cmd_num < 9) || (9 < cmd_num && cmd_num < 99) || (99 < cmd_num)) { // Invalid command
+     cerr << "**** Invalid command - type 9 for help" << endl << endl;
+   }
   }
   return EXIT_SUCCESS;
 }
