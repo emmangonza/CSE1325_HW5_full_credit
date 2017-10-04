@@ -58,14 +58,10 @@ int main(int argc, char *argv[]) {
       copyright = Dialogs::input("Copyright date?", "Imsg = ""nput");
       if (copyright == "CANCEL") break;
 
+
       msg = "";
-      for (int i = 0; i < genres.size(); ++i) {
-         msg += "  ";
-         msg += to_string(i);
-         msg += ") ";
-         msg += genres[i];
-         msg += "\n";
-      }
+      for (int i = 0; i < genres.size(); ++i)
+         msg += "  " + to_string(i) + ") " + genres[i] + "\n";
 
       temp_str = Dialogs::input(msg, "Select a Genre");
       if (temp_str == "CANCEL") break;
@@ -73,92 +69,94 @@ int main(int argc, char *argv[]) {
       temp_num = atoi(temp_str.c_str());
 
       genre = (Genre) temp_num;
-      cin.ignore();
+
 
       msg = "";
-      for (int i = 0; i < medias.size(); ++i) {
-        msg += "  ";
-        msg += to_string(i);
-        msg += ") ";
-        msg += medias[i];
-        msg += "\n";
-      }
-      cout << "Media? ";
-      cin >> temp;
-      media = (Media) temp;
-      cin.ignore();
+      for (int i = 0; i < medias.size(); ++i)
+        msg += "  " + to_string(i) + ") " + medias[i] + "\n";
 
-      msg = ""
-      // for (int i = 0; i < ages.size(); ++i)
-      //   cout << "  " << i << ") " << ages[i] << endl;
-      // cout << "Age? ";
-      // cin >> temp;
-      // age = (Age) temp;
-      // cin.ignore();
+      temp_str = Dialogs::input(msg, "Select a Media");
+      if (temp_str == "CANCEL") break;
 
-      cout << "ISBN? ";
-      getline(cin, isbn);
+      temp_num = atoi(temp_str.c_str());
 
-      try {
-        library.add_publication(Publication(book_title, author, copyright, genre, media, age, isbn));
-      } catch (Publication::Invalid_transaction e) {
-        cerr << "Unable to add" << endl;
-      }
+      media = (Media) temp_num;
 
-   }
-   if (cmd_num >= 2 && cmd_num <= 4) {
-      cout << endl;
-      cout << "----------------------------" << endl;
-      cout << "List of Library Publications" << endl;
-      cout << "----------------------------" << endl;
-      for (int i=0; i<library.number_of_publications(); ++i)
-        cout << i << ") " << library.publication_to_string(i) << endl;
 
-   }
-   if (cmd_num == 3) {
-      int pub;
-      string pat;
-      string pat_phone;
+      msg = "";
+      for (int i = 0; i < ages.size(); ++i)
+        msg += "  " + to_string(i) + ") " + ages[i] + "\n";
 
-      cout << "Publication number? ";
-      cin >> pub;
-      cin.ignore();
+      temp_str = Dialogs::input(msg, "Select a Target Age");
+      if (temp_str == "CANCEL") break;
 
-      cout << "Patron name? ";
-      getline(cin, pat);
-      cout << "Patron phone? ";
-      getline(cin, pat_phone);
+      temp_num = atoi(temp_str.c_str());
 
-      try {
-        library.check_out(pub, pat, pat_phone);
-      } catch (Publication::Invalid_transaction e) {
-        cerr << "ERROR: That publication is already checked out!" << endl;
-      }
+      age = (Age) temp_num;
 
-   }
-   if (cmd_num == 4) {
-      int pub;
-      cout << "Publication number? ";
-      cin >> pub;
-      cin.ignore();
+      // cout << "ISBN? ";
+      // getline(cin, isbn);
 
-      try {
-        library.check_in(pub);
-      } catch (Publication::Invalid_transaction e) {
-        cerr << "ERROR: That publication is already checked in!" << endl;
-      }
-
-   }
-   if (cmd_num == 9) {
-      cout << "Try harder." << endl;
-
-   }
-   if (cmd_num == 99) {
-     library.easter_egg();
-   }
-   if (cmd_num < 0 || (4 < cmd_num && cmd_num < 9) || (9 < cmd_num && cmd_num < 99) || (99 < cmd_num)) { // Invalid command
-     cerr << "**** Invalid command - type 9 for help" << endl << endl;
-   }
+  //     try {
+  //       library.add_publication(Publication(book_title, author, copyright, genre, media, age, isbn));
+  //     } catch (Publication::Invalid_transaction e) {
+  //       cerr << "Unable to add" << endl;
+  //     }
+  //
+  }
+  //  if (cmd_num >= 2 && cmd_num <= 4) {
+  //     cout << endl;
+  //     cout << "----------------------------" << endl;
+  //     cout << "List of Library Publications" << endl;
+  //     cout << "----------------------------" << endl;
+  //     for (int i=0; i<library.number_of_publications(); ++i)
+  //       cout << i << ") " << library.publication_to_string(i) << endl;
+  //
+  //  }
+  //  if (cmd_num == 3) {
+  //     int pub;
+  //     string pat;
+  //     string pat_phone;
+  //
+  //     cout << "Publication number? ";
+  //     cin >> pub;
+  //     cin.ignore();
+  //
+  //     cout << "Patron name? ";
+  //     getline(cin, pat);
+  //     cout << "Patron phone? ";
+  //     getline(cin, pat_phone);
+  //
+  //     try {
+  //       library.check_out(pub, pat, pat_phone);
+  //     } catch (Publication::Invalid_transaction e) {
+  //       cerr << "ERROR: That publication is already checked out!" << endl;
+  //     }
+  //
+  //  }
+  //  if (cmd_num == 4) {
+  //     int pub;
+  //     cout << "Publication number? ";
+  //     cin >> pub;
+  //     cin.ignore();
+  //
+  //     try {
+  //       library.check_in(pub);
+  //     } catch (Publication::Invalid_transaction e) {
+  //       cerr << "ERROR: That publication is already checked in!" << endl;
+  //     }
+  //
+  //  }
+  //  if (cmd_num == 9) {
+  //     cout << "Try harder." << endl;
+  //
+  //  }
+  //  if (cmd_num == 99) {
+  //    library.easter_egg();
+  //  }
+  //  if (cmd_num < 0 || (4 < cmd_num && cmd_num < 9) || (9 < cmd_num && cmd_num < 99) || (99 < cmd_num)) { // Invalid command
+  //    cerr << "**** Invalid command - type 9 for help" << endl << endl;
+  //  }
   }
   return EXIT_SUCCESS;
 }
