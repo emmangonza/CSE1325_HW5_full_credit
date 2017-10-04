@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
       try {
         library.add_publication(Publication(book_title, author, copyright, genre, media, age, isbn));
       } catch (Publication::Invalid_transaction e) {
-        cerr << "Unable to add" << endl;
+        Dialogs::message("Unable to add!", "ERROR!");
       }
 
   }
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
       try {
         library.check_out(pub_num, pat, pat_phone);
       } catch (Publication::Invalid_transaction e) {
-        cerr << "ERROR: That publication is already checked out!" << endl;
+        Dialogs::message("That publication is already checked out!", "ERROR!");
       }
 
    }
@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
       try {
         library.check_in(pub_num);
       } catch (Publication::Invalid_transaction e) {
-        cerr << "ERROR: That publication is already checked in!" << endl;
+        Dialogs::message("That publication is already checked in!", "ERROR!");
       }
 
    }
@@ -188,7 +188,7 @@ Use the '99' command to pre-populate test data.
      library.easter_egg();
    }
    if (cmd_num < 0 || (4 < cmd_num && cmd_num < 9) || (9 < cmd_num && cmd_num < 99) || (99 < cmd_num)) { // Invalid command
-     cerr << "**** Invalid command - type 9 for help" << endl << endl;
+     Dialogs::message("Invalid command - type 9 for help", "ERROR!");
    }
   }
   return EXIT_SUCCESS;
