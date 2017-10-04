@@ -160,9 +160,28 @@ int main(int argc, char *argv[]) {
 
    }
    if (cmd_num == 9) {
-      string msg = "";
+      string msg = R"(
+The LMS tracks publication assets for a library, including those who
+check out and return those publications.
 
-      Dialogs::message(msg);
+(1) Add publication - This allows the librarian to enter data
+    associated with a new publication.
+(2) List all publications - All data known about each publication
+    in the library is listed.
+(3) Check out publication - Enter the data for patrons who check out
+    a publication, and mark that publication as checked out.
+(4) Check in publication - Select a publication and mark it as checked in.
+(5) Add patron - This allows the librarian to enter data associated
+    with a new library patron.
+(6) List patrons - All data know about each patron of the library.
+(9) Help - Print this text.
+(0) Exit - Exit the program. WARNING: The current version does NOT
+    save any entered data. This feature will be added in the "next version".
+
+Use the '99' command to pre-populate test data.
+  )";
+
+      Dialogs::message(msg, "Help Menu");
 
    }
    if (cmd_num == 99) {
